@@ -1,0 +1,36 @@
+NAME_SERVER = server
+NAME_CLIENT = client
+NAME_SERVER_BONUS = server_bonus
+NAME_CLIENT_BONUS = client_bonus
+
+SRC_SERVER = server.c
+SRC_CLIENT = client.c
+SRC_SERVER_BONUS = server_bonus.c
+SRC_CLIENT_BONUS = client_bonus.c
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
+all: $(NAME_SERVER) $(NAME_CLIENT)
+
+$(NAME_SERVER): $(SRC_SERVER)
+	$(CC) $(CFLAGS) -o $(NAME_SERVER) $(SRC_SERVER)
+
+$(NAME_CLIENT): $(SRC_CLIENT)
+	$(CC) $(CFLAGS) -o $(NAME_CLIENT) $(SRC_CLIENT)
+
+bonus: $(NAME_SERVER_BONUS) $(NAME_CLIENT_BONUS)
+
+$(NAME_SERVER_BONUS): $(SRC_SERVER_BONUS)
+	$(CC) $(CFLAGS) -o $(NAME_SERVER_BONUS) $(SRC_SERVER_BONUS)
+
+$(NAME_CLIENT_BONUS): $(SRC_CLIENT_BONUS)
+	$(CC) $(CFLAGS) -o $(NAME_CLIENT_BONUS) $(SRC_CLIENT_BONUS)
+
+fclean:
+	rm -f $(NAME_SERVER) $(NAME_CLIENT)
+	rm -f $(NAME_SERVER_BONUS) $(NAME_CLIENT_BONUS)
+
+re: fclean all
+
+.PHONY: all clean fclean re
